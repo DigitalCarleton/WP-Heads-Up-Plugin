@@ -17,7 +17,8 @@ if (is_admin()) {
 	require_once plugin_dir_path( __FILE__ ) . 'admin/settings-page.php';
 }
 
-
+//general includes
+require_once plugin_dir_path( __FILE__ ) . 'core-functions.php';
 
 
 
@@ -84,7 +85,7 @@ function headsup_callback_field_radio( $args ) {
 
   $radio_options = array(
 
-    'option 1'  => 'Locate display in option 2',
+    'option 1'  => 'Locate display in option 1',
     'option 2' => 'Locate display in option 2'
   );
 
