@@ -4,4 +4,15 @@
 if (!defined('ABSPATH')) {exit;}
 
 
-echo "HELLLOOO";
+
+function headsup_function($arg) {
+
+  $numPosts = wp_count_posts()->publish;
+  $numPages = wp_count_posts('page')->publish;
+
+  echo "Published Posts: " . $numPosts . "<br>";
+  echo "Published Pages: " . $numPages . "<br>";
+
+}
+
+add_action('rightnow_end', 'headsup_function');
