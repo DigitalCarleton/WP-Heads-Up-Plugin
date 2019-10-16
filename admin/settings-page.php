@@ -53,7 +53,7 @@ function headsup_register_settings() {
 
   add_settings_section(
     'headsup_section_1',
-    'Choose where Heads Up is displayed',
+    'Choose the font style for Heads Up',
     'headsup_callback_section_1',
     'headsup'
   );
@@ -61,12 +61,12 @@ function headsup_register_settings() {
 
 
   add_settings_field(
-    'display_location',
-    'Display Location',
+    'font_style',
+    'Font Style',
     'headsup_callback_field_radio',
     'headsup',
     'headsup_section_1',
-    [ 'id' => 'display_location', 'label' => 'Custom display location' ]
+    [ 'id' => 'font_style', 'label' => 'Custom display location' ]
   );
 
 }
@@ -78,7 +78,7 @@ add_action( 'admin_init', 'headsup_register_settings' );
 
 // callback: location section
 function headsup_callback_section_1() {
-	echo '<p>This setting allows you to choose where the heads up display is located.</p>';
+	echo '<p>This setting allows you to choose the font style of the heads up display.</p>';
 }
 
 
@@ -86,7 +86,7 @@ function headsup_callback_section_1() {
 // default plugin options
 function headsup_options_default() {
 	return array(
-		'display_location' => 'Custom display location',
+		'font-style' => 'none',
 	);
 }
 
@@ -104,8 +104,9 @@ function headsup_callback_field_radio( $args ) {
 
   $radio_options = array(
 
-    'option 1'  => 'Locate display in option 1',
-    'option 2' => 'Locate display in option 2'
+    'None'   => 'Display information without styling.',
+    'Bold'   => 'Display information in bold.',
+    'Italic' => 'Display information in italics'
   );
 
 	foreach ( $radio_options as $value => $label ) {

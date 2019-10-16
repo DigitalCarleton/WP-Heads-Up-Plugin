@@ -10,8 +10,11 @@ function headsup_function($arg) {
   $numPosts = wp_count_posts()->publish;
   $numPages = wp_count_posts('page')->publish;
 
-  echo "Published Posts: " . $numPosts . "<br>";
-  echo "Published Pages: " . $numPages . "<br>";
+  $styleInfo = get_option('headsup_options')['font_style'];
+  $styling = ['None' => ['',''], 'Bold' => ['<b>','</b>'], 'Italic' => ['<i>','</i>']];
+
+  echo "{$styling[$styleInfo][0]}Published Posts: " . $numPosts . "{$styling[$styleInfo][1]}<br>";
+  echo "{$styling[$styleInfo][0]}Published Pages: " . $numPages . "{$styling[$styleInfo][1]}<br>";
 
 }
 
