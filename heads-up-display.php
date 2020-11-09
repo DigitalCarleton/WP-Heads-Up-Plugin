@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Heads Up Display
-Description: This plugin creates a box dislaying the number of posts on the site, in a configurable location
+Description: This plugin creates a box displaying basic site information in a configurable location
 Author: Chris Padilla, Alvin Bierley
 Version: 1.1
 */
