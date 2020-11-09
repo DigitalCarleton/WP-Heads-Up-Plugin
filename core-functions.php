@@ -25,7 +25,7 @@ function headsup_function($arg) {
  * Add a new dashboard widget.
  */
 function wpdocs_add_dashboard_widgets() {
-  wp_add_dashboard_widget( 'dashboard_widget', 'Heads Up Display Extension', 'headsup_function' );
+  wp_add_dashboard_widget( 'dashboard_widget', 'Heads Up Display', 'headsup_function' );
 }
 
 /**
