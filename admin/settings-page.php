@@ -58,7 +58,7 @@ function headsup_register_settings() {
 add_action( 'admin_init', 'headsup_register_settings' );
 
 // default plugin options
-function headsup_options_default() {
+function headsup_options_font_default() {
 	return array(
 		'font-style' => 'none',
 	);
@@ -68,9 +68,9 @@ function headsup_options_location_default() {
 	return array( 'location' => 'none' );
 }
 
-// callback: radio field
-function headsup_callback_field_radio( $args ) {
-  $options = get_option( 'headsup_options', headsup_options_default() );
+// callback: font radio field
+function headsup_callback_font( $args ) {
+  $options = get_option( 'headsup_options', headsup_options_font_default() );
 
   $id    = isset( $args['id'] )    ? $args['id']    : '';
   $label = isset( $args['label'] ) ? $args['label'] : '';

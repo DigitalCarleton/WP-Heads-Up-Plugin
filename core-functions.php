@@ -3,10 +3,10 @@
 // exit if file is called directly
 if (!defined('ABSPATH')) {exit;}
 
-
-
-function headsup_function($arg) {
-
+/**
+ * Displays number of posts, pages, comments, and date of most recent post
+ */
+function headsup_function() {
   $numPosts = wp_count_posts()->publish;
   $numPages = wp_count_posts('page')->publish;
   $numComments = wp_count_comments()->total_comments;
