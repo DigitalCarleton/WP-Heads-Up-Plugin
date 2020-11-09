@@ -57,16 +57,6 @@ function headsup_register_settings() {
 }
 add_action( 'admin_init', 'headsup_register_settings' );
 
-
-
-
-// callback: location section
-function headsup_callback_section_1() {
-	echo '<p>This setting allows you to choose the font style of the heads up display.</p>';
-}
-
-
-
 // default plugin options
 function headsup_options_default() {
 	return array(
@@ -74,8 +64,9 @@ function headsup_options_default() {
 	);
 }
 
-
-
+function headsup_options_location_default() {
+	return array( 'location' => 'none' );
+}
 
 // callback: radio field
 function headsup_callback_field_radio( $args ) {
@@ -103,8 +94,30 @@ function headsup_callback_field_radio( $args ) {
 	}
 }
 
+// callback: location radio field
+function headsup_callback_location( $args ) {
+	$options = get_option( 'headsup_options', headsup_options_location_default());
+	
+	$id    = isset( $args['id'] )    ? $args['id']    : '';
+	$label = isset( $args['label'] ) ? $args['label'] : '';
 
+	$selected_option = isset( $options[$id] ) ? sanitize_text_field( $options[$id] ) : '';
 
+	$radio_options = array( 
+		'At a glance'     => 'Display information under the "At a Glance" widget in the admin dashboard',
+		'Heads Up Widget' => 'Display information in a separate widget',
+		'Main page'       => 'Display information on the main page of the site'
+	);
+
+	foreach ( $radio_options as $value => $label ) {
+		
+		$checked = checked( $selected_option === $value, true, false );
+
+		echo '<label><input name="headsup_options['. $id .']" type="radio" value="'. $value . '"'. $checked .'> ';
+		echo '<span>'. $label .'</span></label><br />';
+
+	}
+}
 
 // validate plugin settings
 function headsup_validate_options($input) {
