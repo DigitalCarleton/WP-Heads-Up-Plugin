@@ -3,7 +3,7 @@
 Plugin Name: Heads Up Display
 Description: This plugin creates a box dislaying the number of posts on the site, in a configurable location
 Author: Chris Padilla, Alvin Bierley
-Version: 1.0
+Version: 1.1
 */
 
 
