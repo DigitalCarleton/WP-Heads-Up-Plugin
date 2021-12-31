@@ -11,6 +11,9 @@ function headsup_function() {
   $numPages = wp_count_posts('page')->publish;
   $numComments = wp_count_comments()->total_comments;
   $recentPosts = wp_get_recent_posts();
+  $recentAuthorId = $recentPosts[0]['post_author'];
+  $recentAuthorUsername = get_user_by('id', $recentAuthorId)->user_login;
+  $countUsers = count_users();
 
   $styleInfo = get_option('headsup_options')['font_style'];
   $styling = ['None' => ['',''], 'Bold' => ['<b>','</b>'], 'Italic' => ['<i>','</i>']];
@@ -19,6 +22,8 @@ function headsup_function() {
   echo "{$styling[$styleInfo][0]}Published Pages: " . $numPages . "{$styling[$styleInfo][1]}<br>";
   echo "{$styling[$styleInfo][0]}Total Comments: " . $numComments . "{$styling[$styleInfo][1]}<br>";
   echo "{$styling[$styleInfo][0]}Most Recent Post: " . date( 'jS F, Y', strtotime( $recentPosts[0]['post_date'] ) ) . "{$styling[$styleInfo][1]}<br>";
+  echo "{$styling[$styleInfo][0]}Most Recent Author: " . $recentAuthorUsername . "{$styling[$styleInfo][1]}<br>";
+  echo "{$styling[$styleInfo][0]}Total Users: " . $countUsers['total_users'] . "{$styling[$styleInfo][1]}<br>";
 }
 
 /**
