@@ -2,7 +2,7 @@
 /*
 Plugin Name: Heads Up Display
 Description: This plugin creates a box displaying basic site information in a configurable location
-Author: Chris Padilla, Alvin Bierley
+Author: Chris Padilla, Alvin Bierley, Martin Bernard
 Version: 1.1
 */
 
