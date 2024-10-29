@@ -15,15 +15,21 @@ function headsup_function() {
   $recentAuthorUsername = get_user_by('id', $recentAuthorId)->user_login;
   $countUsers = count_users();
 
-  $styleInfo = get_option('headsup_options')['font_style'];
+  $cssInfo = get_option('headsup_options')['custom-css'];
+
+  $styleInfo = get_option('headsup_options')['font-style'];
   $styling = ['None' => ['',''], 'Bold' => ['<b>','</b>'], 'Italic' => ['<i>','</i>']];
 
+  echo '<style>#headsup' . $cssInfo . '</style>';
+
+  echo '<div id="headsup">';
   echo "{$styling[$styleInfo][0]}Published Posts: " . $numPosts . "{$styling[$styleInfo][1]}<br>";
   echo "{$styling[$styleInfo][0]}Published Pages: " . $numPages . "{$styling[$styleInfo][1]}<br>";
   echo "{$styling[$styleInfo][0]}Total Comments: " . $numComments . "{$styling[$styleInfo][1]}<br>";
   echo "{$styling[$styleInfo][0]}Most Recent Post: " . date( 'jS F, Y', strtotime( $recentPosts[0]['post_date'] ) ) . "{$styling[$styleInfo][1]}<br>";
   echo "{$styling[$styleInfo][0]}Most Recent Author: " . $recentAuthorUsername . "{$styling[$styleInfo][1]}<br>";
   echo "{$styling[$styleInfo][0]}Total Users: " . $countUsers['total_users'] . "{$styling[$styleInfo][1]}<br>";
+  echo "</div>";
 }
 
 /**
