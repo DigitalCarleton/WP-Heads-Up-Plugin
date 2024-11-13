@@ -58,7 +58,6 @@ function headsup_register_settings() {
 	add_settings_field(
 		'headsup_callback_css',
 		'Custom CSS',
-		'headsup_callback_css',
 		'headsup_plugin',
 		'api_settings',
 		[ 'id' => 'custom-css', 'label' => '' ]
