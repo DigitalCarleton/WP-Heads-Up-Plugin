@@ -43,7 +43,7 @@ function headsup_register_settings() {
 		'headsup_callback_font',
 		'headsup_plugin',
 		'api_settings',
-		[ 'id' => 'font_style', 'label' => 'Custom display location' ]
+		[ 'id' => 'font-style', 'label' => 'Custom display location' ]
 	);
 
 	add_settings_field(
@@ -53,6 +53,14 @@ function headsup_register_settings() {
 		'headsup_plugin',
 		'api_settings',
 		[ 'id' => 'location', 'label' => 'Custom display location' ]
+	);
+
+	add_settings_field(
+		'headsup_callback_css',
+		'Custom CSS',
+		'headsup_plugin',
+		'api_settings',
+		[ 'id' => 'custom-css', 'label' => '' ]
 	);
 }
 add_action( 'admin_init', 'headsup_register_settings' );
@@ -66,6 +74,12 @@ function headsup_options_font_default() {
 
 function headsup_options_location_default() {
 	return array( 'location' => 'none' );
+}
+
+function headsup_options_css_default() {
+	return array(
+		'custom-css' => '{font-size: 12px}',
+	);
 }
 
 // callback: font radio field
@@ -117,6 +131,18 @@ function headsup_callback_location( $args ) {
 		echo '<span>'. $label .'</span></label><br />';
 
 	}
+}
+
+//callback: font size text field
+function headsup_callback_css ( $args ) {
+	$options = get_option( 'headsup_options', headsup_options_css_default());
+	
+	$id    = isset( $args['id'] )    ? $args['id']    : '';
+	$label = isset( $args['label'] ) ? $args['label'] : '';
+	
+	echo '<label><textarea name="headsup_options['. $id .']" cols="30" rows="7">' . $options[$id] . '</textarea>';
+	echo '<span>'. $label .'</span></label><br />';
+
 }
 
 // validate plugin settings
