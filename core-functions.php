@@ -14,8 +14,8 @@ function headsup_function() {
   $recentAuthorId = $recentPosts[0]['post_author'];
   $recentAuthorUsername = get_user_by('id', $recentAuthorId)->user_login;
   $countUsers = count_users();
-
-  $styleInfo = get_option('headsup_options')['font_style'];
+  
+  $styleInfo = get_option('headsup_options')['font_style'] ?? 'None';
   $styling = ['None' => ['',''], 'Bold' => ['<b>','</b>'], 'Italic' => ['<i>','</i>']];
 
   echo "{$styling[$styleInfo][0]}Published Posts: " . $numPosts . "{$styling[$styleInfo][1]}<br>";
@@ -48,7 +48,7 @@ function main_page_display() {
  * Chooses where to display plugin content
  */
 function display_content() {
-  $locationInfo = get_option('headsup_options')['location'];
+  $locationInfo = get_option('headsup_options')['location'] ?? 'At a glance';
   switch ($locationInfo) {
     case "At a glance":
       add_action( 'rightnow_end', 'headsup_function' );
