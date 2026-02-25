@@ -33,7 +33,7 @@ function headsup_plugin_section_text() {
 
 // register plugin settings
 function headsup_register_settings() {
-	register_setting( 'headsup_options', 'headsup_options', 'headsup_validate_options' );
+	register_setting( 'headsup_options', 'headsup_options', 'headsup_callback_validate_options' );
 
 	add_settings_section( 'api_settings', 'Display Options', 'headsup_plugin_section_text', 'headsup_plugin' );
 
