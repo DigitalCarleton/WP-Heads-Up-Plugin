@@ -27,7 +27,8 @@ function headsup_add_sublevel_menu() {
 		'Heads Up Display Settings',
 		'Heads Up Display',
 		'manage_options',
-		'heads-up-display',
+		// Keep menu slug aligned with settings-page section target.
+		'headsup_plugin',
 		'headsup_display_settings_page'
 	);
 
