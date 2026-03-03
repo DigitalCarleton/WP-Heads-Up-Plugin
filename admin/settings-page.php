@@ -6,10 +6,8 @@ if (!defined('ABSPATH')) {
   exit;
 }
 
-function headsup_add_settings_page() {
-	add_options_page( 'Headsup plugin page', 'Headsup Plugin Menu', 'manage_options', 'headsup_plugin', 'headsup_display_settings_page' );
-}    
-add_action( 'admin_menu', 'headsup_add_settings_page' );
+// Note: settings UI is attached from admin/admin-menu.php via add_submenu_page().
+// We intentionally avoid adding an extra options page entry to prevent duplicate menus.
 
 function headsup_display_settings_page() {
 	// check if user is allowed access
@@ -33,7 +31,8 @@ function headsup_plugin_section_text() {
 
 // register plugin settings
 function headsup_register_settings() {
-	register_setting( 'headsup_options', 'headsup_options', 'headsup_callback_validate_options' );
+	// Register plugin settings with the correct sanitize callback.
+	register_setting( 'headsup_options', 'headsup_options', 'headsup_validate_options' );
 
 	add_settings_section( 'api_settings', 'Display Options', 'headsup_plugin_section_text', 'headsup_plugin' );
 
@@ -60,12 +59,15 @@ add_action( 'admin_init', 'headsup_register_settings' );
 // default plugin options
 function headsup_options_font_default() {
 	return array(
-		'font-style' => 'none',
+		// Keep key name consistent with form field + runtime lookup.
+		'font_style' => 'None',
 	);
 }
 
 function headsup_options_location_default() {
-	return array( 'location' => 'none' );
+	return array(
+		'location' => 'At a glance',
+	);
 }
 
 // callback: font radio field
@@ -120,7 +122,23 @@ function headsup_callback_location( $args ) {
 }
 
 // validate plugin settings
-function headsup_validate_options($input) {
-	// todo: add validation functionality..
-	return $input;
+function headsup_validate_options( $input ) {
+	// Defensive defaults in case fields are missing from POST.
+	$output = array(
+		'font_style' => 'None',
+		'location'   => 'At a glance',
+	);
+
+	$allowed_font_styles = array( 'None', 'Bold', 'Italic' );
+	$allowed_locations   = array( 'At a glance', 'Heads Up Widget', 'Main page' );
+
+	if ( isset( $input['font_style'] ) && in_array( $input['font_style'], $allowed_font_styles, true ) ) {
+		$output['font_style'] = sanitize_text_field( $input['font_style'] );
+	}
+
+	if ( isset( $input['location'] ) && in_array( $input['location'], $allowed_locations, true ) ) {
+		$output['location'] = sanitize_text_field( $input['location'] );
+	}
+
+	return $output;
 }
